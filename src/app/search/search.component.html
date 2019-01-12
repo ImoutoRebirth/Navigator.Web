@@ -1,0 +1,22 @@
+<div class="search">
+  <input class="search-text" 
+          type="text" 
+          placeholder="Search tags..."
+          (input)="onSearchTextChange($event.target.value)" />
+  
+  <div [ngClass]="{'popup-show': searchResults.length && !isPopupHidden, 'popup-hide': !searchResults.length || isPopupHidden}">
+    <div class="search-result" 
+          *ngFor="let searchResult of searchResults"
+          (click)="resultSelected(searchResult);"
+          title="{{searchResult.name}}">{{searchResult.name}}</div>
+  </div>
+
+  <div>
+    <div class="selected-tag"
+          *ngFor="let selectedTag of selectedTags">
+        <span class="tag-name" title="{{selectedTag.name}}">{{selectedTag.name}}</span>
+        <a (click)="invertTag(selectedTag);" [routerLink]="">-</a>
+        <a (click)="removeTag(selectedTag);" [routerLink]="">x</a>
+    </div>
+  </div>
+</div>
